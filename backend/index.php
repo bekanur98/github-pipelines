@@ -1,4 +1,4 @@
 <?php 
 
 print_r('Hello world!');
-print_r('Test linter')
+print_r('Test linter success')
