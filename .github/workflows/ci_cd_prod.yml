@@ -9,4 +9,5 @@ concurrency: production-deploy
 
 jobs:
     gw_deploy:
+        secrets: inherit
         uses: ./.github/workflows/ci_cd_github.yml
