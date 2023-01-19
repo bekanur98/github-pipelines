@@ -30,7 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/linter
-        with: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   # DEPLOY
   codedeoploy:
