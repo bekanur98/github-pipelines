@@ -1,0 +1,12 @@
+name: Deploy to production
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency: production-deploy
+
+jobs:
+    gw_deploy:
+        uses: ./.github/workflows/ci_cd_github.yml

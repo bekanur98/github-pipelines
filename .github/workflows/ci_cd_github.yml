@@ -1,0 +1,49 @@
+name: Deploy to production
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: false
+        default: production
+      with_code_style_check:
+        type: boolean
+        required: false
+        default: true
+
+jobs:
+  # Ввиду противного бага https://github.community/t/reusable-workflow-env-context-not-available-in-jobs-job-id-with/206111
+  # Я вынужден делать так
+  intermediate:
+    outputs:
+      environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
+
+  #code style check (lint)
+  linter:
+    if: ${{ inputs.with_code_style_check }}
+    name: Code style check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/linter
+
+  # DEPLOY
+  codedeoploy:
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-latest
+    name: Deploy to environment
+    environment: ${{ inputs.environment }}
+    outputs:
+      environment: "Deploy finished"
+    needs:
+      [
+        intermediate,
+        linter,
+      ]
+    steps:
+      - run: exit 0
+
