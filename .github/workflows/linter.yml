@@ -2,7 +2,10 @@ name: Linter
 
 on: 
   push:
-    branches: ["master"]
+    branches:
+      - master
+    paths: 
+      - 'storefront/**/*'
 
 jobs:
   lint: 
