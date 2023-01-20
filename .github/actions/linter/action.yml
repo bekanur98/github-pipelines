@@ -6,20 +6,10 @@ inputs:
     description: Github token to use github libs
     required: true
 
-jobs:
-  intermediate:
-    outputs:
-      environment: prod
-    runs-on: ubuntu-latest
-    steps:
-      - run: exit 0
-
-  lint: 
-    name: Lint code base
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Linter
-        uses: github/super-linter@v3.17.0
-        env: 
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ inputs.token }}
+runs:
+  steps:
+    - name: Run Linter
+      uses: github/super-linter@v3.17.0
+      env: 
+        DEFAULT_BRANCH: master
+        GITHUB_TOKEN: ${{ inputs.token }}
