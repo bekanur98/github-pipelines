@@ -24,7 +24,7 @@ jobs:
   
   #code style check (lint)
   linter:
-    if: github.event.head_commit.modified.includes('storefront/**/*') || ${{ env.IS_LINTER_NEEDED }}
+    if: github.event.head_commit.modified.includes('storefront/**/*') || env.IS_LINTER_NEEDED == 'true'
     name: Code style check
     runs-on: ubuntu-latest
     steps:
