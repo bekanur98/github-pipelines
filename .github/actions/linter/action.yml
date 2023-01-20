@@ -1,15 +1,15 @@
 name: Linter
 description: Linter
 
-inputs:
-    ghub_token:
-        description: Github token to use github libs
-        required: true
+# inputs:
+#     ghub_token:
+#         description: Github token to use github libs
+#         required: true
 
 jobs:
   intermediate:
     outputs:
-      environment: ${{ inputs.ghub_token }}
+      environment: prod
     runs-on: ubuntu-latest
     steps:
       - run: exit 0
@@ -22,4 +22,4 @@ jobs:
         uses: github/super-linter@v3.17.0
         env: 
           DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ inputs.ghub_token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
