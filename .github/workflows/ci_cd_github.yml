@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: exit 0
-      - run: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo ${{ secrets.GITHUB_TOKEN }}
 
   #code style check (lint)
   linter:
