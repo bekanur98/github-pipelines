@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: exit 0
-
+  
   #code style check (lint)
   linter:
-    if: ${{ inputs.with_code_style_check }}
+    if: github.event.head_commit.modified.includes('storefront/**/*') || ${{ env.IS_LINTER_NEEDED }}
     name: Code style check
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +34,16 @@ jobs:
         uses: ./.github/actions/linter
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+  # Определяем будем ли запускать linter в следующий раз
+  linter_launch_determinant:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine modified files
+        if: github.event.head_commit.modified.includes('storefront/**/*')
+        run: echo "::set-env name=IS_LINTER_NEEDED::true"
+      - name: Determine modified files
+        unless: github.event.head_commit.modified.includes('storefront/**/*')
+        run: echo "::set-env name=IS_LINTER_NEEDED::false"
 
   # DEPLOY
   codedeoploy:
@@ -43,6 +53,7 @@ jobs:
     environment: ${{ inputs.environment }}
     outputs:
       environment: "Deploy finished"
+      run: echo "::set-env name=IS_LINTER_NEEDED::false"
     needs:
       [
         intermediate,

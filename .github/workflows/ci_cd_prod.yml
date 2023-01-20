@@ -13,4 +13,3 @@ jobs:
         secrets: inherit
         with:
           environment: production
-          with_code_style_check: true
