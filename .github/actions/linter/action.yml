@@ -1,10 +1,10 @@
 name: Linter
 description: Linter
 
-# inputs:
-#     ghub_token:
-#         description: Github token to use github libs
-#         required: true
+inputs:
+  token:
+    description: Github token to use github libs
+    required: true
 
 jobs:
   intermediate:
