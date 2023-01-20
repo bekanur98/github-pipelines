@@ -10,7 +10,7 @@ on:
       with_code_style_check:
         type: boolean
         required: false
-        default: true
+        default: false
 
 jobs:
   # Ввиду противного бага https://github.community/t/reusable-workflow-env-context-not-available-in-jobs-job-id-with/206111
