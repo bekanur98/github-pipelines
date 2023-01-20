@@ -42,7 +42,7 @@ jobs:
         if: github.event.head_commit.modified.includes('storefront/**/*')
         run: echo "::set-env name=IS_LINTER_NEEDED::true"
       - name: Determine modified files
-        unless: github.event.head_commit.modified.includes('storefront/**/*')
+        if: !github.event.head_commit.modified.includes('storefront/**/*')
         run: echo "::set-env name=IS_LINTER_NEEDED::false"
 
   # DEPLOY
