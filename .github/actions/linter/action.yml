@@ -7,6 +7,7 @@ inputs:
     required: true
 
 runs:
+  using: composite
   steps:
     - name: Run Linter
       uses: github/super-linter@v3.17.0
