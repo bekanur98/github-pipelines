@@ -1,5 +1,0 @@
-name: Linter launch determinant
-
-on:
-  workflow_call:
-

@@ -1,11 +1,6 @@
 name: Linter
 description: Linter
 
-inputs:
-  token:
-    description: Github token to use github libs
-    required: true
-
 on:
   push:
     branches:
