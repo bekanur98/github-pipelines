@@ -24,7 +24,7 @@ jobs:
     - uses: actions/cache@v3
       id: cache_legacy_assets
       env:
-        LA_CACHE_PATH: ./storefront/build
+        LA_CACHE_PATH: ./storefront/build/
         LA_CACHE_KEY: artifact-${{ hashFiles('./storefront/**') }}
       with:
         path: ${{ env.LA_CACHE_PATH }}
