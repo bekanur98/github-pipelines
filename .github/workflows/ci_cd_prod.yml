@@ -33,7 +33,7 @@ jobs:
         key: ${{ env.LA_CACHE_KEY }}
     - uses: ./.github/actions/clear_cache
       with:
-        keys: "artifact1, artifact2, artifact3"
+        keys: "artifact-, artifact2, artifact3"
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Send Discord Notification
