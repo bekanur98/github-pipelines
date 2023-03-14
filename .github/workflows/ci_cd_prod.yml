@@ -23,14 +23,14 @@ jobs:
       if: github.event.pull_request.merged == true
       run: |
         echo "Pull Request was merged."
-    - uses: actions/cache@v3
-      id: cache_legacy_assets
-      env:
-        LA_CACHE_PATH: ./
-        LA_CACHE_KEY: artifact-${{ hashFiles('/storefront/**') }}
-      with:
-        path: ${{ env.LA_CACHE_PATH }}
-        key: ${{ env.LA_CACHE_KEY }}
+    # - uses: actions/cache@v3
+    #   id: cache_legacy_assets
+    #   env:
+    #     LA_CACHE_PATH: ./
+    #     LA_CACHE_KEY: artifact-${{ hashFiles('/storefront/**') }}
+    #   with:
+    #     path: ${{ env.LA_CACHE_PATH }}
+    #     key: ${{ env.LA_CACHE_KEY }}
     - uses: ./.github/actions/clear_cache
       with:
         keys: "artifact-, artifact2, artifact3"
