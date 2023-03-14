@@ -17,7 +17,7 @@ runs:
           shell: bash
           run: |
               set -e  
-              IFS=',' read -ra keys <<< "$INPUT_keys"
+              IFS=',' read -ra keys <<< "${{ keys }}"
               for key in "${keys[@]}"
               do
                 echo $key
