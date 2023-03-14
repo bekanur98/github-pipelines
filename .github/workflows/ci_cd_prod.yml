@@ -35,12 +35,11 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Send Discord Notification
-      if: github.event.pull_request.merged == true
       env:
         BRANCH: ${{ github.event.pull_request.head.ref }}
         USER: ${{ github.event.pull_request.user.login }}
         REPO: ${{ github.event.repository.name }}
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        -d "{\"username\":\"GitHub Actions\",\"avatar_url\":\"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\",\"content\":\"Branch '$BRANCH' was merged into the main branch of repository '$REPO' by user '$USER'.\"}" \
+        -d "{\"username\":\"GitHub Actions\",\"avatar_url\":\"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\",\"content\":\"Branch '$BRANCH' ${{ github.token }} was merged into the main branch of repository '$REPO' by user '$USER'.\"}" \
         $DISCORD_WEBHOOK_URL
