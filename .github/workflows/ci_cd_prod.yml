@@ -29,6 +29,10 @@ jobs:
       with:
         path: ${{ env.LA_CACHE_PATH }}
         key: ${{ env.LA_CACHE_KEY }}
+    - uses: ./.github/actions/clear_cache
+      with:
+        keys: "artifact"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Send Discord Notification
       if: github.event.pull_request.merged == true
