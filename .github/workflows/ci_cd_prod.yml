@@ -34,7 +34,7 @@ jobs:
     - uses: ./.github/actions/clear_cache
       with:
         keys: "artifact"
-        github_token: ${{ secrets.API_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Send Discord Notification
       if: github.event.pull_request.merged == true
