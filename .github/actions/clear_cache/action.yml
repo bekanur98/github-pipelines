@@ -8,6 +8,8 @@ inputs:
     github_token:
         description: Github secrets
         required: true
+permissions:
+  actions: write
 
 runs:
     using: composite
@@ -16,8 +18,6 @@ runs:
         - name: Clear
           shell: bash
           run: |
-              declare test="${{github.token}}"
-              echo $test
               curl -L \
                 -H "Accept: application/vnd.github+json" \
                 -H "Authorization: Bearer ${{ github.token }}"\
