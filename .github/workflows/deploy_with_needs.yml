@@ -42,11 +42,13 @@ jobs:
           ref: ${{ inputs.branch }}
       - name: "Imitations of build backend"
         run: echo "Backend builded"
-  deploy:
+  pre-deploy:
+    if ${{ always() }}
     needs: [ build-frontend, build-backend ]
+  deploy:
+    needs: [ pre-deploy ]
     if: >
-      (needs.build-frontend.result == 'success' || needs.build-frontend == 'never') ||
-      (needs.build-backend.result == 'success' || needs.build-backend == 'never')
+      (needs.pre-deploy.result == 'success'
     runs-on: ubuntu-latest  
     name: "Deploy"
     permissions:
