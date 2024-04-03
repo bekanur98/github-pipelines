@@ -54,13 +54,15 @@ jobs:
 
   deploy:
     needs: [ pre-deploy ]
-    if: (needs.pre-deploy.result == 'success')
+    # if: (needs.pre-deploy.result == 'success')
     runs-on: ubuntu-latest  
     name: "Deploy"
     permissions:
       contents: read
       id-token: write
     steps:
+      - name: "Echo pre deploy job"
+        run: echo ${{ needs.pre-deploy.result }}
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
