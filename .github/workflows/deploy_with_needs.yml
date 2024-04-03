@@ -43,11 +43,11 @@ jobs:
       - name: "Imitations of build backend"
         run: echo "Backend builded"
   deploy:
-    needs: [ build-admin-frontend, build-backend ]
+    needs: [ build-frontend, build-backend ]
     if: >
-      (needs.build-admin-frontend.result == 'success' || needs.build-admin-frontend == 'never') ||
+      (needs.build-frontend.result == 'success' || needs.build-frontend == 'never') ||
       (needs.build-backend.result == 'success' || needs.build-backend == 'never')
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  
     name: "Deploy"
     permissions:
       contents: read
