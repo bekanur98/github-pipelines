@@ -1,0 +1,61 @@
+name: Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      deployFront:
+        description: 'Deploy frontend'
+        type: boolean
+        required: false
+        default: false
+      deployBack:
+        description: 'Deploy backend'
+        type: boolean
+        required: false
+        default: false
+jobs:
+  build-frontend:
+    if: ${{ github.event.inputs.deployFront == 'true'}}
+    permissions:
+      contents: read
+      id-token: write
+    name: "Build frontend"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - name: "Imitations of build frontend"
+        run: echo "Frontend builded"
+
+  build-backend:
+    if: ${{ github.event.inputs.deployBack == 'true'}}
+    permissions:
+      contents: read
+      id-token: write
+    name: "Build backend"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - name: "Imitations of build backend"
+        run: echo "Backend builded"
+  deploy:
+    needs: [ build-admin-frontend, build-backend ]
+    if: >
+      (needs.build-admin-frontend.result == 'success' || needs.build-admin-frontend == 'never') ||
+      (needs.build-backend.result == 'success' || needs.build-backend == 'never')
+        runs-on: ubuntu-latest
+    name: "Deploy"
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - name: "Imitations of deploy"
+        run: echo "Deploy finished"
