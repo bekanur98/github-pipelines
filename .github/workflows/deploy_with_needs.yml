@@ -46,12 +46,12 @@ jobs:
   pre-deploy:
     if: ${{ always() }}
     needs: [ build-frontend, build-backend ]
-    runs-on: ubuntu-latest
-    name: "Pre deploy checking"
+    runs-on: ubuntu-latest  
+    name: "Pre Deploy"
     steps:
       - name: "Pre deploy"
-      run: echo "Pre deploy finished"
-      
+        run: echo "Pre deploy finished"
+
   deploy:
     needs: [ pre-deploy ]
     if: (needs.pre-deploy.result == 'success')
